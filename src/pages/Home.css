@@ -1,0 +1,185 @@
+/* HOME PAGE - STYLES DE BASE */
+/* ANIMATION D'ARRIÈRE-PLAN */
+body {
+  background: radial-gradient(ellipse at bottom, #0d1b2a 0%, #000000 100%);
+  overflow-x: hidden;
+}
+
+.background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: url('/particles.svg') repeat;
+  opacity: 0.05;
+  animation: moveBackground 60s linear infinite;
+}
+
+@keyframes moveBackground {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 10000px 10000px;
+  }
+}
+
+.home-container {
+    padding: 1rem;
+    color: #fff;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  
+  .hero-section {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 0 1rem;
+  }
+  
+  .hero-section h1 {
+    font-size: 2.5rem;
+    color: #00e5ff;
+  }
+  
+  .hero-section p {
+    font-size: 1.2rem;
+    color: #ccc;
+    margin: 1rem auto 1.5rem;
+    max-width: 600px;
+  }
+  
+  .cta-button {
+    background-color: #00e5ff;
+    text-align: center;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background 0.3s;
+    margin-top:2rem ;
+  }
+  
+  .cta-button:hover {
+    background-color: #00bcd4;
+  }
+  
+  /* SECTIONS INFO & CONSEIL */
+  .info-section{
+    margin-bottom: 5rem;
+  }
+  .info-section, .advice-section {
+    background: linear-gradient(135deg, rgba(0,229,255,0.05), rgba(0,229,255,0.02));
+    border-radius: 30px;
+    padding: 2rem;
+    box-shadow: 0 0 10px rgba(0,229,255,0.1);
+  }
+  
+  .info-section,
+  .advice-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    padding: 0 1rem;
+    margin-bottom: 2rem;
+
+  }
+  
+  .info-text,
+  .advice-text {
+    flex: 1;
+    max-width: 500px;
+    min-width: 280px;
+  }
+  
+  .info-text h2,
+  .advice-text h2 {
+    font-size: 1.8rem;
+    color: #00e5ff;
+    margin-bottom: 1rem;
+  }
+  
+  .info-text p,
+  .advice-text p {
+    font-size: 1.1rem;
+    color: #ddd;
+  }
+  .info-image,
+  .advice-image{
+    width: 40%;
+  }
+
+  .info-image img,
+  .advice-image img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* RESPONSIVE DESIGN */
+  @media screen and (max-width: 768px) {
+    .hero-section h1 {
+      font-size: 2rem;
+    }
+  
+    .hero-section p {
+      font-size: 1rem;
+    }
+  
+    
+    .advice-section {
+      flex-direction: column;
+      text-align: center;
+    }
+    .info-section{
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+  
+    .info-text,
+    .advice-text {
+      max-width: 100%;
+    }
+    .info-image,
+  .advice-image{
+    width: 100%;
+  }
+  }
+  .stats-section {
+    margin-top:4rem;
+     margin-bottom: 4rem;
+    color: #fff;
+  }
+  
+  .stats-section h2 {
+    color: #00e5ff;
+    margin-bottom: 2rem;
+  }
+  
+  .stats-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .stat-item {
+    background: linear-gradient(145deg, #112233, #0d1b2a);
+    padding: 1.5rem 2rem;
+    border-radius: 20px;
+    min-width: 180px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  }
+  
+  .stat-item h3 {
+    font-size: 2rem;
+    color: #00e5ff;
+    margin-bottom: 0.5rem;
+  }
+  

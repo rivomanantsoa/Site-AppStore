@@ -1,0 +1,114 @@
+.footer {
+  background-color: #0d0d0d;
+  color: #fff;
+  padding: 3rem 1rem 2rem;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.contenu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-contact,
+.footer-form {
+  flex: 1;
+  min-width: 280px;
+}
+
+.footer-contact h3,
+.footer-form h3 {
+  color: #00e5ff;
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+}
+
+.footer-contact ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-contact li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
+}
+
+.footer-contact a {
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-contact a:hover {
+  color: #00e5ff;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  background-color: #1a1a1a;
+  color: #fff;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #bbb;
+}
+
+.contact-form button {
+  background-color: #00e5ff;
+  border: none;
+  color: #000;
+  padding: 0.8rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+  background-color: #00c5dd;
+}
+
+.success-message,
+.error-message {
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+.success-message {
+  color: #00ff99;
+}
+
+.error-message {
+  color: #ff4d4d;
+}
+
+.footer-bottom {
+  margin-top: 2rem;
+  text-align: center;
+  color: #888;
+  font-size: 0.9rem;
+  border-top: 1px solid #222;
+  padding-top: 1rem;
+}
