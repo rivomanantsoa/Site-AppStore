@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mon CV & Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#cv">CV</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="accueil">
+    <h1>Bienvenue, je suis [Ton Nom]</h1>
+    <p>Développeur passionné | Créateur d'applications web</p>
+    <a href="#cv" class="btn">Voir mon CV</a>
+  </section>
+
+  <section id="cv">
+    <h2>Mon CV</h2>
+    <h3>Expérience</h3>
+    <ul>
+      <li><strong>Développeur Web</strong> – Entreprise X (2023)</li>
+      <li><strong>Stagiaire</strong> – Hôpital Y (2022)</li>
+    </ul>
+
+    <h3>Formation</h3>
+    <ul>
+      <li>Licence en Informatique – Université Z</li>
+    </ul>
+
+    <h3>Compétences</h3>
+    <p>HTML, CSS, JavaScript, Python, PHP, React, Django...</p>
+  </section>
+
+  <section id="portfolio">
+    <h2>Portfolio</h2>
+    <div class="projets">
+      <div class="projet fade-in">
+        <img src="https://via.placeholder.com/300x200" alt="Projet 1" />
+        <h4>Projet 1</h4>
+        <p>Application de gestion de stock en Flutter</p>
+      </div>
+      <div class="projet fade-in">
+        <img src="https://via.placeholder.com/300x200" alt="Projet 2" />
+        <h4>Projet 2</h4>
+        <p>Site web de gestion de vente de poissons</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 [Ton Nom]</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>// Animation fade-in au scroll
+    const elements = document.querySelectorAll(".fade-in");
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    });
+    
+    elements.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Portfolio Professionnel</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+  :root {
+    --main-color: #0077b6;
+    --accent-color: #00b4d8;
+    --dark-color: #03314b;
+    --light-color: #f0f8ff;
+    --shadow-color: rgba(0, 0, 0, 0.12);
+    --transition: 0.4s ease;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0; padding: 0;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--light-color);
+    color: var(--dark-color);
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+
+  header {
+    padding: 30px 20px 10px;
+    text-align: center;
+    background: #00497a;
+    color: #caf0f8;
+    user-select: none;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  header p {
+    font-weight: 300;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+  }
+
+  main {
+    max-width: 900px;
+    margin: 25px auto 60px;
+    padding: 0 20px;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 25px;
+  }
+
+  .project-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 18px var(--shadow-color);
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  .project-card:hover {
+    box-shadow: 0 20px 38px rgba(0,119,182,0.35);
+    transform: translateY(-12px);
+  }
+  .project-image {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    background-color: #a3cef1;
+    user-select: none;
+  }
+  .project-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  .project-title {
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    color: var(--main-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .project-summary {
+    color: #055a8c;
+    font-size: 0.95rem;
+    flex-grow: 1;
+  }
+
+  /* Modal Detail */
+  #detailModal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    overflow-y: auto;
+    padding: 40px 20px;
+  }
+  #detailModal.active {
+    display: flex;
+  }
+  #detailContent {
+    background: white;
+    border-radius: 20px;
+    max-width: 720px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 30px 40px 40px;
+    box-shadow: 0 20px 40px rgba(0, 119, 182, 0.4);
+    position: relative;
+    animation: slideInUp 0.5s ease forwards;
+  }
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(60px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  #modalCloseBtn {
+    position: absolute;
+    top: 18px; right: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 2rem;
+    color: var(--main-color);
+    font-weight: 700;
+    line-height: 1;
+    transition: color var(--transition);
+  }
+  #modalCloseBtn:hover {
+    color: var(--accent-color);
+  }
+
+  /* Modal Content */
+  #detailContent h2 {
+    color: var(--main-color);
+    font-weight: 700;
+    margin-bottom: 20px;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  #detailContent p {
+    margin-bottom: 15px;
+    color: #04426c;
+    font-size: 1rem;
+    user-select: none;
+  }
+  #detailContent strong {
+    color: var(--accent-color);
+  }
+
+  /* Sections inside modal */
+  .detail-section {
+    margin-bottom: 25px;
+  }
+  .detail-section h3 {
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: #0277bd;
+    user-select: none;
+  }
+
+  /* Gallery */
+  .gallery {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    user-select: none;
+    scroll-padding: 10px;
+    margin-top: 10px;
+  }
+  .gallery img {
+    height: 120px;
+    border-radius: 14px;
+    box-shadow: 0 5px 15px var(--shadow-color);
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .gallery img:hover {
+    transform: scale(1.08);
+  }
+
+  /* Scrollbar for gallery and modal content */
+  #detailContent::-webkit-scrollbar,
+  .gallery::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
+  #detailContent::-webkit-scrollbar-thumb,
+  .gallery::-webkit-scrollbar-thumb {
+    background-color: var(--accent-color);
+    border-radius: 4px;
+  }
+
+  /* Icons */
+  svg.icon {
+    width: 28px;
+    height: 28px;
+    fill: var(--accent-color);
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    main {
+      margin: 25px 15px 60px;
+    }
+    #detailContent {
+      padding: 25px 20px 30px;
+      max-width: 90vw;
+      max-height: 95vh;
+    }
+    .gallery img {
+      height: 100px;
+    }
+  }
+</style>
+</head>
+<body>
+<header role="banner">
+  <h1 aria-label="Titre principal du portfolio">Mon Portfolio</h1>
+  <p aria-label="Sous-titre">Découvrez mes projets, leurs conceptions, défis et expériences</p>
+</header>
+
+<main aria-label="Liste des projets">
+  <div class="projects-grid">
+    <article tabindex="0" class="project-card" aria-labelledby="title-project1" role="button" aria-describedby="desc-project1" data-project="1">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="Illustration Application mobile Sécurité" loading="lazy" class="project-image" />
+      <div class="project-content">
+        <h2 id="title-project1" class="project-title">
+          <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 0L11 3H4v6h16V3h-7l-1-3zM6 11v13h12V11H6zm6 0v2h2v-2h-2z"/></svg>
+          Application Sécurité Mobile
+        </h2>
+        <p id="desc-project1" class="project-summary">Application pour surveillance et alertes de sécurité avec fonctionnalités de localisation en temps réel.</p>
+      </div>
+    </article>
+
+    <article tabindex="0" class="project-card" aria-labelledby="title-project2" role="button" aria-describedby="desc-project2" data-project="2">
+      <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80" alt="Illustration Plateforme E-commerce" loading="lazy" class="project-image" />
+      <div class="project-content">
+        <h2 id="title-project2" class="project-title">
+          <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M3 6h18v2H3zM3 10h18v2H3zM3 14h18v2H3zM3 18h18v2H3z"/></svg>
+          Plateforme E-commerce
+        </h2>
+        <p id="desc-project2" class="project-summary">Site complet de vente en ligne avec gestion des produits, panier, paiement et suivi des commandes.</p>
+      </div>
+    </article>
+
+    <article tabindex="0" class="project-card" aria-labelledby="title-project3" role="button" aria-describedby="desc-project3" data-project="3">
+      <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="Illustration Système de gestion de contenu" loading="lazy" class="project-image"/>
+      <div class="project-content">
+        <h2 id="title-project3" class="project-title">
+          <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M21 6h-5V2H8v4H3v16h18V6zM10 19H6v-6h4v6zm8 0h-4v-4h4v4zM18 12h-8V8h2v2h4v2z"/></svg>
+          CMS pour Blogging
+        </h2>
+        <p id="desc-project3" class="project-summary">Système de gestion de contenu performant pour blogs avec interface administrateur complète et personnalisable.</p>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Modal for project detail -->
+<div id="detailModal" role="dialog" aria-modal="true" aria-labelledby="detailTitle" aria-describedby="detailDesc">
+  <div id="detailContent">
+    <button id="modalCloseBtn" aria-label="Fermer le panneau de détails">&times;</button>
+    <h2 id="detailTitle"></h2>
+
+    <div id="detailSections">
+
+      <section class="detail-section" id="descSection">
+        <h3>Présentation</h3>
+        <p id="detailDesc"></p>
+      </section>
+
+      <section class="detail-section" id="designSection">
+        <h3>Conception & Structure</h3>
+        <p id="detailDesign"></p>
+        <div class="gallery" id="detailGallery" aria-label="Galerie d’images du projet"></div>
+      </section>
+
+      <section class="detail-section" id="expectationsSection">
+        <h3>Attentes & Objectifs</h3>
+        <p id="detailExpectations"></p>
+      </section>
+
+      <section class="detail-section" id="challengesSection">
+        <h3>Difficultés rencontrées</h3>
+        <p id="detailChallenges"></p>
+      </section>
+
+      <section class="detail-section" id="experienceSection">
+        <h3>Compétences & Expériences requises</h3>
+        <p id="detailExperience"></p>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  // Data for project details
+  const projectsDetails = {
+    1: {
+      title: "Application Sécurité Mobile",
+      description: "Une application mobile conçue pour assurer la surveillance et l'alerte en temps réel pour les particuliers et entreprises.",
+      design: "L'application utilise une architecture mobile-first, avec un backend Firebase pour gestion des notifications et géolocalisation. L’interface est simple et intuitive, sécurisée avec authentification biométrique.",
+      gallery: [
+        "https://images.unsplash.com/photo-1581090700227-285693d6e109?auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=400&q=80"
+      ],
+      expectations: "Fournir une alerte rapide en cas d’intrusion, localisation précise, rapport d’événements, interface simple et rapide.",
+      challenges: "Gestion de la latence des notifications, sécurité des données utilisateurs, implémentation multi-plateforme iOS et Android.",
+      experience: "Bonne maîtrise React Native, Firebase, sécurité mobile, UX/UI design mobile, tests et déploiement sur stores."
+    },
+    2: {
+      title: "Plateforme E-commerce",
+      description: "Site e-commerce complet permettant la vente de produits avec gestion de panier, paiements sécurisés, et suivi des commandes.",
+      design: "Architecture client-serveur avec React côté front et Node.js/Express côté backend, base de données MongoDB. UI moderne, responsive et optimisation SEO.",
+      gallery: [
+        "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=400&q=80"
+      ],
+      expectations: "Fluidité d'achat, gestion complète produit et commande, moyens de paiement variés, interface client et admin robustes.",
+      challenges: "Sécurisation des paiements, gestion des sessions et stocks, optimisation temps de chargement, intégration API tierces.",
+      experience: "Expérience avec React, Node.js, bases NoSQL, Stripe API, hébergement cloud, développement sécuritaire."
+    },
+    3: {
+      title: "CMS pour Blogging",
+      description: "Système complet de gestion de contenu spécialement conçu pour les blogs avec interface utilisateur et administrateur.",
+      design: "Architecture monolithique avec Django back-end, template dynamique en Bootstrap, base PostgreSQL. Interface épurée et éditeur rich-text inclus.",
+      gallery: [
+        "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=400&q=80"
+      ],
+      expectations: "Facilité d'écriture et publication, gestion des tags/categories, commentaires, statistiques de visite.",
+      challenges: "Sécurisation des accès, gestion des médias, responsive et performance, interface multi-utilisateurs.",
+      experience: "Connaissance Python (Django), SQL, HTML/CSS, sécurité web, expérience UX, gestion de bases de données."
+    }
+  };
+
+  // Elements references
+  const modal = document.getElementById('detailModal');
+  const detailTitle = document.getElementById('detailTitle');
+  const detailDesc = document.getElementById('detailDesc');
+  const detailDesign = document.getElementById('detailDesign');
+  const detailGallery = document.getElementById('detailGallery');
+  const detailExpectations = document.getElementById('detailExpectations');
+  const detailChallenges = document.getElementById('detailChallenges');
+  const detailExperience = document.getElementById('detailExperience');
+  const closeBtn = document.getElementById('modalCloseBtn');
+
+  // Open modal with project details
+  function openProjectDetail(id) {
+    const project = projectsDetails[id];
+    if (!project) return;
+
+    detailTitle.textContent = project.title;
+    detailDesc.textContent = project.description;
+    detailDesign.textContent = project.design;
+    detailExpectations.textContent = project.expectations;
+    detailChallenges.textContent = project.challenges;
+    detailExperience.textContent = project.experience;
+
+    // Clear previous gallery
+    detailGallery.innerHTML = '';
+    if (project.gallery && project.gallery.length > 0) {
+      project.gallery.forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = `Image illustrative du projet ${project.title}`;
+        img.loading = "lazy";
+        detailGallery.appendChild(img);
+      });
+    }
+
+    // Show modal and focus close btn
+    modal.classList.add('active');
+    closeBtn.focus();
+  }
+
+  // Close modal function
+  function closeModal() {
+    modal.classList.remove('active');
+  }
+
+  // Event listeners for project cards
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('click', () => {
+      openProjectDetail(card.dataset.project);
+    });
+    // Accessible keyboard support
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        openProjectDetail(card.dataset.project);
+        e.preventDefault();
+      }
+    });
+  });
+
+  // Close modal on close btn click or Escape key
+  closeBtn.addEventListener('click', closeModal);
+  window.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeModal();
+    }
+  });
+
+  // Close modal when clicking outside content
+  modal.addEventListener('click', e => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+</script>
+</body>
+</html>
+</content>
+</create_file>

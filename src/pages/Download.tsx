@@ -10,26 +10,26 @@ const apps = [
   {
     name: "Gestion Ferme Porcine",
     description: "Suivi des porcs, alimentation, vaccins et ventes.",
-    image: "src/assets/apps/pig-svgrepo-com.svg",
+    image: "/apps/pig-svgrepo-com.svg",
     link: "#",
-    screenshots: ["src/assets/images/undraw_code-thinking_0vf2.svg", "src/assets/screenshots/Capture d’écran (4).png"],
+    screenshots: ["/images/undraw_code-thinking_0vf2.svg", "/screenshots/Capture d’écran (4).png"],
   },
   {
     name: "Vente de Poissons",
     description: "Application intuitive pour les marchands de poissons.",
-    image: "src/assets/apps/fish-svgrepo-com.svg",
+    image: "/apps/fish-svgrepo-com.svg",
     link: "#",
-    screenshots: ["src/assets/screenshots/Capture d’écran (5).png", "src/assets/screenshots/Capture d’écran (6).png",
-      "src/assets/screenshots/Capture d’écran (14).png", "src/assets/screenshots/Capture d’écran (5).png",
-      "src/assets/screenshots/Capture d’écran (6).png", "src/assets/screenshots/Capture d’écran (14).png"],
+    screenshots: ["/screenshots/Capture d’écran (5).png", "/screenshots/Capture d’écran (6).png",
+      "/screenshots/Capture d’écran (14).png", "/screenshots/Capture d’écran (5).png",
+      "/screenshots/Capture d’écran (6).png", "/screenshots/Capture d’écran (14).png"],
   },
 
   {
     name: "Gestion Événement Église",
     description: "Tickets, paiements partiels, statistiques journalières.",
-    image: "src/assets/apps/cash-out-svgrepo-com.svg",
+    image: "/apps/cash-out-svgrepo-com.svg",
     link: "#",
-    screenshots: ["src/assets/screenshots/Capture d’écran (8).png", "src/assets/screenshots/Capture d’écran (9).png"],
+    screenshots: ["/screenshots/Capture d’écran (8).png", "/screenshots/Capture d’écran (9).png"],
   },
 ];
 

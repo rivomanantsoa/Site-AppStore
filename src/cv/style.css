@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    background: #f4f4f4;
+    color: #333;
+  }
+  
+  header {
+    background: #222;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav ul li a {
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+  }
+  
+  nav ul li a:hover {
+    background: #555;
+  }
+  
+  section {
+    padding: 60px 20px;
+    max-width: 1000px;
+    margin: auto;
+  }
+  
+  #accueil {
+    text-align: center;
+    background: #0077cc;
+    color: white;
+  }
+  
+  .btn {
+    display: inline-block;
+    margin-top: 20px;
+    background: white;
+    color: #0077cc;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .projets {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .projet {
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    flex: 1 1 300px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .projet:hover {
+    transform: scale(1.05);
+  }
+  
+  footer {
+    text-align: center;
+    padding: 20px;
+    background: #222;
+    color: white;
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1s ease;
+  }
+  
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  

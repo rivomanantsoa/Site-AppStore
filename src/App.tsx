@@ -21,6 +21,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/telechargement" element={<Download />} />
         <Route path="/apropos" element={<Apropos />} />
+        
     
         {/* Tu peux ajouter d'autres routes plus tard */}
       </Routes>

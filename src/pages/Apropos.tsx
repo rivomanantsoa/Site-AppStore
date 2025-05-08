@@ -1,6 +1,7 @@
 import React from 'react';
 import './Apropos.css';
 import FadeInOnScroll from '../components/FadeInOnScroll';
+import UploadApp from '../UploadApp';
 
 const AboutPage = () => {
   return (
@@ -95,6 +96,7 @@ const AboutPage = () => {
           </p>
         </FadeInOnScroll>
       </section>
+      <UploadApp />
     </div>
   );
 };

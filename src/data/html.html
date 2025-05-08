@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Gestion Poissonnerie - Maquette d'Interface</title>
+<style>
+  /* Reset and basic styles */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f8fa;
+    color: #333;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+    font-size: 14px;
+  }
+  /* Sidebar */
+  nav {
+    width: 280px;
+    background: #0077b6;
+    color: white;
+    display: flex; flex-direction: column;
+    padding-top: 20px;
+    user-select: none;
+  }
+  nav h1 {
+    font-weight: 700;
+    font-size: 1.5em;
+    padding-left: 20px;
+    margin-bottom: 30px;
+    letter-spacing: 1.5px;
+  }
+  nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+  }
+  nav ul li {
+    padding: 15px 25px;
+    cursor: pointer;
+    border-left: 4px solid transparent;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  nav ul li:hover, nav ul li.active {
+    background-color: #00b4d8;
+    border-left-color: #caf0f8;
+  }
+  nav ul li span {
+    user-select: none;
+  }
+
+  /* Content */
+  main {
+    flex-grow: 1;
+    background: white;
+    padding: 20px 25px;
+    overflow-y: auto;
+    height: 100vh;
+  }
+  main h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: 700;
+    color: #0077b6;
+  }
+  /* Responsive for smaller widths */
+  @media (max-width: 600px) {
+    nav {
+      width: 70px;
+      padding-top: 15px;
+    }
+    nav h1 {
+      display: none;
+    }
+    nav ul li {
+      padding: 15px 10px;
+      font-size: 12px;
+      text-align: center;
+      border-left: none;
+      border-bottom: 3px solid transparent;
+    }
+    nav ul li:hover, nav ul li.active {
+      background-color: #00b4d8;
+      border-left: none;
+      border-bottom-color: #caf0f8;
+    }
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  th, td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #ddd;
+  }
+  th {
+    background-color: #caf0f8;
+    color: #0077b6;
+    text-align: left;
+  }
+
+  /* Stock Graph container */
+  #stockChart {
+    max-width: 100%;
+    height: 250px;
+    margin-top: 15px;
+  }
+
+  /* File list styles */
+  #fileList {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  #fileList li {
+    background: #e0f7fa;
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  #fileList li:hover {
+    background-color: #00acc1;
+    color: white;
+  }
+  /* Scrollbar styling for modern browsers */
+  main::-webkit-scrollbar {
+    width: 8px;
+  }
+  main::-webkit-scrollbar-thumb {
+    background-color: #0077b6;
+    border-radius: 4px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <h1>Poissonnerie</h1>
+  <ul id="menu">
+    <li class="active" data-section="salesHistory"><span>Ventes & Historique</span></li>
+    <li data-section="stockManagement"><span>Gestion Stock & Graph</span></li>
+    <li data-section="dataAnalysis"><span>Analyse de Données</span></li>
+    <li data-section="accounting"><span>Comptabilité</span></li>
+    <li data-section="files"><span>Fichiers Générés</span></li>
+  </ul>
+</nav>
+
+<main>
+  <!-- Sales & History -->
+  <section id="salesHistory" class="content-section">
+    <h2>Ventes et Historique</h2>
+    <p>Consultation rapide des ventes réalisées et de l'historique complet.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Produit</th>
+          <th>Quantité</th>
+          <th>Prix Unitaire</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody id="salesTableBody">
+        <tr>
+          <td>2024-06-01</td>
+          <td>Saumon</td>
+          <td>5 kg</td>
+          <td>15,00 €</td>
+          <td>75,00 €</td>
+        </tr>
+        <tr>
+          <td>2024-06-02</td>
+          <td>Truite</td>
+          <td>3 kg</td>
+          <td>12,00 €</td>
+          <td>36,00 €</td>
+        </tr>
+        <tr>
+          <td>2024-06-03</td>
+          <td>Cabillaud</td>
+          <td>4 kg</td>
+          <td>14,00 €</td>
+          <td>56,00 €</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Stock Management & Graph -->
+  <section id="stockManagement" class="content-section" style="display:none;">
+    <h2>Gestion de Stock & Graphique</h2>
+    <p>Suivi du stock actuel et visualisation graphique.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Produit</th>
+          <th>Quantité en Stock</th>
+          <th>Seuil d'Alerte</th>
+        </tr>
+      </thead>
+      <tbody id="stockTableBody">
+        <tr>
+          <td>Saumon</td>
+          <td>20 kg</td>
+          <td>10 kg</td>
+        </tr>
+        <tr>
+          <td>Truite</td>
+          <td>15 kg</td>
+          <td>8 kg</td>
+        </tr>
+        <tr>
+          <td>Cabillaud</td>
+          <td>30 kg</td>
+          <td>10 kg</td>
+        </tr>
+        <tr>
+          <td>Merlan</td>
+          <td>5 kg</td>
+          <td>5 kg</td>
+        </tr>
+      </tbody>
+    </table>
+    <canvas id="stockChart"></canvas>
+  </section>
+
+  <!-- Data Analysis -->
+  <section id="dataAnalysis" class="content-section" style="display:none;">
+    <h2>Analyse de Données</h2>
+    <p>Exploration et aperçu des tendances et prévisions basées sur les données de la poissonnerie.</p>
+    <canvas id="analysisChart"></canvas>
+  </section>
+
+  <!-- Accounting -->
+  <section id="accounting" class="content-section" style="display:none;">
+    <h2>Comptabilité</h2>
+    <p>Gestion des comptes, revenus, dépenses, et rapports financiers.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Revenu</th>
+          <th>Dépense</th>
+          <th>Solde</th>
+        </tr>
+      </thead>
+      <tbody id="accountingTableBody">
+        <tr>
+          <td>2024-06-01</td>
+          <td>Vente Saumon</td>
+          <td>75,00 €</td>
+          <td>0,00 €</td>
+          <td>75,00 €</td>
+        </tr>
+        <tr>
+          <td>2024-06-02</td>
+          <td>Achat équipements</td>
+          <td>0,00 €</td>
+          <td>120,00 €</td>
+          <td>-45,00 €</td>
+        </tr>
+        <tr>
+          <td>2024-06-03</td>
+          <td>Vente Cabillaud</td>
+          <td>56,00 €</td>
+          <td>0,00 €</td>
+          <td>11,00 €</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Files -->
+  <section id="files" class="content-section" style="display:none;">
+    <h2>Fichiers Générés Automatiquement</h2>
+    <p>Liste des rapports historiques et analyses de données générés automatiquement.</p>
+    <ul id="fileList">
+      <li>rapport_ventes_2024_06_01.pdf</li>
+      <li>analyse_stock_2024_06_03.csv</li>
+      <li>rapport_compta_mai_2024.xlsx</li>
+      <li>analyse_tendance_2024_06.png</li>
+    </ul>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // Menu navigation logic
+  const menuItems = document.querySelectorAll("#menu li");
+  const sections = document.querySelectorAll(".content-section");
+
+  menuItems.forEach(item => {
+    item.addEventListener('click', () => {
+      // Remove active from all
+      menuItems.forEach(i => i.classList.remove('active'));
+      // Hide all sections
+      sections.forEach(s => s.style.display = 'none');
+      // Activate clicked item
+      item.classList.add('active');
+      // Show related section
+      document.getElementById(item.getAttribute('data-section')).style.display = '';
+    });
+  });
+
+  // Stock Chart data
+  const stockCtx = document.getElementById('stockChart').getContext('2d');
+  const stockChart = new Chart(stockCtx, {
+    type: 'bar',
+    data: {
+      labels: ['Saumon', 'Truite', 'Cabillaud', 'Merlan'],
+      datasets: [{
+        label: 'Quantité en Stock (kg)',
+        data: [20, 15, 30, 5],
+        backgroundColor: '#0077b6'
+      }, {
+        label: 'Seuil d\'Alerte (kg)',
+        data: [10,8,10,5],
+        backgroundColor: '#00b4d8'
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { stepSize: 5 }
+        }
+      },
+      plugins: {
+        legend: { labels: {color: '#0077b6', font: {weight: 'bold'}} }
+      }
+    }
+  });
+
+  // Data Analysis Chart (Line Chart) sample
+  const analysisCtx = document.getElementById('analysisChart').getContext('2d');
+  const analysisChart = new Chart(analysisCtx, {
+    type: 'line',
+    data: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+      datasets: [{
+        label: 'Ventes (en kg)',
+        data: [120, 90, 130, 100, 140, 150],
+        borderColor: '#0077b6',
+        backgroundColor: 'rgba(0, 119, 182, 0.2)',
+        fill: true,
+        tension: 0.3,
+        pointRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { labels: { color: '#0077b6', font: {weight: 'bold'} } }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { stepSize: 20 }
+        }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
+

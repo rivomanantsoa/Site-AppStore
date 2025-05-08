@@ -4,6 +4,7 @@ import './Home.css';
 import { Download, Phone, Lightbulb, ArrowRightCircle } from 'lucide-react';
 import FadeInOnScroll from '../components/FadeInOnScroll';
 
+
 const Home: React.FC = () => {
   return (
     <div className="home-container">
@@ -45,7 +46,7 @@ const Home: React.FC = () => {
         transition={{ delay: 0.3, duration: 1 }}
       >
         <div className="info-image">
-          <img src="src/assets/images/undraw_mobile-site_qjby.svg" alt="Innovation numérique" />
+          <img src="/images/undraw_mobile-site_qjby.svg" alt="Innovation numérique" />
         </div>
         <div className="info-text">
           <h2>Pourquoi choisir le numérique ?</h2>
@@ -70,7 +71,7 @@ const Home: React.FC = () => {
             </p>
           </div>
           <div className="advice-image">
-            <img src="src/assets/images/undraw_ideas_41b9.svg" alt="Conseil numérique" />
+            <img src="/images/undraw_ideas_41b9.svg" alt="Conseil numérique" />
           </div>
         </div>
       </FadeInOnScroll>

@@ -66,7 +66,7 @@
   left: 0;
   width: 100px;
   height: 100px;
-  background: url('src/assets/decor/download-svgrepo-com.svg') no-repeat center;
+  background: url('/decor/download-svgrepo-com.svg') no-repeat center;
   background-size: contain;
   z-index: 0;
   opacity: 0.2;
@@ -85,7 +85,7 @@
     right: 0;
     width: 200px;
     height: 200px;
-    background: url('src/assets/decor/mobile-phone-chat-health-device-telephone-smartphone-svgrepo-com.svg') no-repeat center;
+    background: url('/decor/mobile-phone-chat-health-device-telephone-smartphone-svgrepo-com.svg') no-repeat center;
     background-size: contain;
     z-index: 0;
     opacity: 0.2;

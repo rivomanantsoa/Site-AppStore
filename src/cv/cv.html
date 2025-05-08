@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Mon CV & Portfolio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+    :root {
+      --main-color: #0066cc;
+      --accent-color: #00aaff;
+      --dark-color: #222;
+      --light-color: #f9f9f9;
+      --shadow-color: rgba(0,0,0,0.1);
+      --transition: 0.5s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--light-color);
+      color: var(--dark-color);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    header {
+      width: 100%;
+      position: fixed;
+      top: 0; left: 0;
+      background: white;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+    }
+
+    header h1 {
+      font-weight: 600;
+      color: var(--main-color);
+      letter-spacing: 1.2px;
+      font-size: 1.6rem;
+      cursor: default;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    nav ul li {
+      font-weight: 600;
+      cursor: pointer;
+      position: relative;
+      color: var(--dark-color);
+      transition: color var(--transition);
+    }
+
+    nav ul li:hover,
+    nav ul li.active {
+      color: var(--accent-color);
+    }
+
+    nav ul li::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0; right: 0;
+      height: 3px;
+      background: var(--accent-color);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+      border-radius: 2px;
+    }
+
+    nav ul li.active::after,
+    nav ul li:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    main {
+      padding: 100px 40px 40px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    section {
+      margin-bottom: 70px;
+    }
+
+    section h2 {
+      font-weight: 600;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: var(--main-color);
+      border-left: 5px solid var(--accent-color);
+      padding-left: 10px;
+      user-select: none;
+    }
+
+    /* About */
+    #about {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      align-items: center;
+    }
+
+    #about img {
+      width: 220px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px var(--shadow-color);
+      flex-shrink: 0;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    #about .intro {
+      flex: 1;
+      min-width: 280px;
+      font-size: 1.1rem;
+      color: #444;
+      user-select: none;
+    }
+
+    /* Skills */
+    #skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+    }
+
+    .skill {
+      flex: 1 1 120px;
+      text-align: center;
+      padding: 10px;
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 3px 10px var(--shadow-color);
+      transition: transform 0.3s;
+      user-select: none;
+      cursor: default;
+    }
+
+    .skill:hover {
+      transform: translateY(-8px) scale(1.1);
+      box-shadow: 0 8px 18px rgba(0, 170, 255, 0.3);
+    }
+
+    .skill-icon {
+      font-size: 2.5rem;
+      color: var(--accent-color);
+      margin-bottom: 8px;
+    }
+
+    .skill-name {
+      font-weight: 600;
+      color: var(--dark-color);
+    }
+
+    /* Experience */
+    #experience .job {
+      margin-bottom: 30px;
+      user-select: none;
+    }
+    #experience .job h3 {
+      font-weight: 600;
+      font-size: 1.3rem;
+      color: var(--main-color);
+    }
+    #experience .job .period {
+      font-size: 0.85rem;
+      color: #777;
+      margin-bottom: 8px;
+      font-style: italic;
+    }
+    #experience .job ul {
+      list-style: disc inside;
+      color: #555;
+    }
+
+    /* Portfolio */
+    #portfolio .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+      gap: 20px;
+    }
+    .project {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 6px 16px var(--shadow-color);
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.3s ease;
+    }
+    .project:hover {
+      box-shadow: 0 16px 24px rgba(0, 170, 255, 0.3);
+      transform: translateY(-8px);
+    }
+    .project-image {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      pointer-events: none;
+      user-select: none;
+    }
+    .project-content {
+      padding: 15px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-title {
+      font-weight: 700;
+      color: var(--main-color);
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+    .project-desc {
+      flex-grow: 1;
+      color: #555;
+      font-size: 0.95rem;
+      user-select: none;
+    }
+    .project-link {
+      margin-top: 12px;
+      text-decoration: none;
+      color: var(--accent-color);
+      font-weight: 600;
+      align-self: flex-start;
+      transition: color 0.3s ease;
+    }
+    .project-link:hover {
+      color: var(--main-color);
+      text-decoration: underline;
+    }
+
+    /* Contact */
+    #contact form {
+      max-width: 480px;
+      margin-top: 15px;
+    }
+    #contact label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+      user-select: none;
+    }
+    #contact input,
+    #contact textarea {
+      width: 100%;
+      background: white;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 16px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+      resize: vertical;
+      font-family: inherit;
+      user-select: text;
+    }
+    #contact input:focus,
+    #contact textarea:focus {
+      border-color: var(--accent-color);
+      outline: none;
+    }
+    #contact button {
+      background-color: var(--main-color);
+      border: none;
+      padding: 12px 20px;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    #contact button:hover {
+      background-color: var(--accent-color);
+    }
+
+    /* Scroll reveal animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      animation-fill-mode: forwards;
+      animation-name: fadeInUp;
+      animation-timing-function: ease;
+      animation-duration: 0.7s;
+    }
+    .fade-in.delay-1 { animation-delay: 0.2s; }
+    .fade-in.delay-2 { animation-delay: 0.4s; }
+    .fade-in.delay-3 { animation-delay: 0.6s; }
+    .fade-in.delay-4 { animation-delay: 0.8s; }
+    .fade-in.delay-5 { animation-delay: 1s; }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media(max-width: 720px) {
+      #about {
+        flex-direction: column;
+        align-items: center;
+      }
+      #about .intro {
+        font-size: 1rem;
+        text-align: center;
+      }
+      main {
+        padding: 100px 20px 40px;
+      }
+      nav ul {
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Mon CV & Portfolio</h1>
+  <nav aria-label="Navigation principale">
+    <ul>
+      <li class="active" data-target="about">À propos</li>
+      <li data-target="skills">Compétences</li>
+      <li data-target="experience">Expérience</li>
+      <li data-target="portfolio">Portfolio</li>
+      <li data-target="contact">Contact</li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section id="about" class="fade-in">
+    <h2>À propos de moi</h2>
+    <div id="about">
+      <img src="https://i.pravatar.cc/220" alt="Photo de profil" loading="lazy" />
+      <div class="intro">
+        <p>Bonjour! Je suis un développeur passionné, doté d'une expérience professionnelle solide et d'une créativité débordante.</p>
+        <p>J'aime créer des applications web modernes, performantes et faciles à utiliser, avec un design soigné et des animations captivantes.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="fade-in delay-1">
+    <h2>Compétences</h2>
+    <div id="skills" aria-label="Liste des compétences">
+      <div class="skill" aria-label="HTML">
+        <div class="skill-icon" aria-hidden="true">&#x1F4C4;</div>
+        <div class="skill-name">HTML</div>
+      </div>
+      <div class="skill" aria-label="CSS">
+        <div class="skill-icon" aria-hidden="true">&#x1F4D8;</div>
+        <div class="skill-name">CSS</div>
+      </div>
+      <div class="skill" aria-label="JavaScript">
+        <div class="skill-icon" aria-hidden="true">&#x1F4BB;</div>
+        <div class="skill-name">JavaScript</div>
+      </div>
+      <div class="skill" aria-label="React">
+        <div class="skill-icon" aria-hidden="true">&#x269B;</div>
+        <div class="skill-name">React</div>
+      </div>
+      <div class="skill" aria-label="Vue.js">
+        <div class="skill-icon" aria-hidden="true">&#x1F40D;</div>
+        <div class="skill-name">Vue.js</div>
+      </div>
+      <div class="skill" aria-label="Git">
+        <div class="skill-icon" aria-hidden="true">&#x1F4DD;</div>
+        <div class="skill-name">Git</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="fade-in delay-2">
+    <h2>Expérience</h2>
+    <div class="job" tabindex="0">
+      <h3>Développeur Frontend - XYZ Solutions</h3>
+      <div class="period">Janvier 2022 - Présent</div>
+      <ul>
+        <li>Création d'interfaces réactives pour applications client.</li>
+        <li>Intégration d'API REST et gestion d'état avec Redux.</li>
+        <li>Optimisation du temps de chargement et SEO.</li>
+      </ul>
+    </div>
+    <div class="job" tabindex="0">
+      <h3>Développeur Web Junior - ABTech</h3>
+      <div class="period">Juin 2020 - Décembre 2021</div>
+      <ul>
+        <li>Développement de sites vitrines avec HTML, CSS, JS.</li>
+        <li>Maintenance et adaptations responsive design.</li>
+        <li>Collaboration avec l'équipe design et marketing.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="portfolio" class="fade-in delay-3">
+    <h2>Portfolio</h2>
+    <div class="projects" aria-label="Liste des projets">
+      <div class="project" tabindex="0" aria-label="Projet Application ToDo">
+        <img class="project-image" src="https://picsum.photos/id/1011/400/240" alt="Screenshot projet Application ToDo" loading="lazy" />
+        <div class="project-content">
+          <div class="project-title">Application ToDo</div>
+          <div class="project-desc">Gestion de tâches avec interface intuitive, filtres et notifications.</div>
+          <a href="#" class="project-link" target="_blank" rel="noopener">Voir le projet</a>
+        </div>
+      </div>
+      <div class="project" tabindex="0" aria-label="Projet Site E-commerce">
+        <img class="project-image" src="https://picsum.photos/id/1031/400/240" alt="Screenshot projet Site E-commerce" loading="lazy" />
+        <div class="project-content">
+          <div class="project-title">Site E-commerce</div>
+          <div class="project-desc">Boutique en ligne avec fonctionnalités de panier, paiement et suivi de commandes.</div>
+          <a href="#" class="project-link" target="_blank" rel="noopener">Voir le projet</a>
+        </div>
+      </div>
+      <div class="project" tabindex="0" aria-label="Projet Blog Personnel">
+        <img class="project-image" src="https://picsum.photos/id/1019/400/240" alt="Screenshot projet Blog Personnel" loading="lazy" />
+        <div class="project-content">
+          <div class="project-title">Blog Personnel</div>
+          <div class="project-desc">Site Blog avec gestion des articles, tags et commentaires.</div>
+          <a href="#" class="project-link" target="_blank" rel="noopener">Voir le projet</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="fade-in delay-4">
+    <h2>Contact</h2>
+    <form id="contactForm" aria-label="Formulaire de contact">
+      <label for="name">Nom complet</label>
+      <input type="text" id="name" name="name" placeholder="Votre nom complet" required aria-required="true" />
+
+      <label for="email">Adresse email</label>
+      <input type="email" id="email" name="email" placeholder="votre.email@example.com" required aria-required="true" />
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" placeholder="Votre message ici..." required aria-required="true"></textarea>
+
+      <button type="submit">Envoyer</button>
+    </form>
+  </section>
+</main>
+
+<script>
+  // Navigation active state and smooth scroll
+  const navItems = document.querySelectorAll('nav ul li');
+  const sections = [...document.querySelectorAll('main section')];
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      navItems.forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+      const targetId = item.dataset.target;
+      const targetSection = document.getElementById(targetId);
+      if(targetSection) {
+        window.scrollTo({
+          top: targetSection.offsetTop - 90,
+          behavior: 'smooth',
+        });
+      }
+    });
+  });
+  // Highlight nav on scroll
+  window.addEventListener('scroll', () => {
+    let scrollPos = window.scrollY + 100;
+    let current = null;
+    for (const section of sections){
+      if(scrollPos >= section.offsetTop){
+        current = section.id;
+      }
+    }
+    if(current){
+      navItems.forEach(i => i.classList.remove('active'));
+      const activeNav = [...navItems].find(i=> i.dataset.target === current);
+      if(activeNav) activeNav.classList.add('active');
+    }
+  });
+
+  // Contact form simple validation and submit
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
+    if(name === '' || email === '' || message === ''){
+      alert('Merci de remplir tous les champs.');
+      return;
+    }
+    // Simple email regex check
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!emailRegex.test(email)){
+      alert('Veuillez entrer une adresse email valide.');
+      return;
+    }
+    alert(`Merci pour votre message, ${name} !`);
+    form.reset();
+  });
+
+  // Scroll reveal fade in using Intersection Observer
+  const faders = document.querySelectorAll('.fade-in');
+  const appearOptions = {
+    threshold: 0.25,
+    rootMargin: "0px 0px -100px 0px"
+  };
+  const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+    entries.forEach(entry=>{
+      if(!entry.isIntersecting){
+        return;
+      } else {
+        entry.target.style.animationPlayState = 'running';
+        appearOnScroll.unobserve(entry.target);
+      }
+    });
+  }, appearOptions);
+  faders.forEach(fader=>{
+    fader.style.animationPlayState = 'paused';
+    appearOnScroll.observe(fader);
+  });
+</script>
+
+</body>
+</html>
+</content>
+</create_file>
